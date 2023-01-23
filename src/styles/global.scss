@@ -1,0 +1,20 @@
+@font-face {
+  font-family: Avenir-bold;
+  src: url("../assets/fonts/Avenir-Bold.otf");
+}
+@font-face {
+  font-family: Avenir-italic;
+  src: url("../assets/fonts/Avenir-It.otf");
+}
+@font-face {
+  font-family: Avenir-regular;
+  src: url("../assets/fonts/Avenir-Regular.otf");
+}
+
+$avenir-regular: Avenir-regular;
+$avenir-italic: Avenir-italic;
+$avenir-bold: Avenir-bold;
+$primary-text-color: #213f7d;
+$secondary-text-color: #545f7d;
+$tertiary-text-color: #39cdcc;
+$white: #ffffff;

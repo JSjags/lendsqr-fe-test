@@ -1,0 +1,141 @@
+@use "./global" as g;
+
+$bg-color: #ffffff;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  background: $bg-color;
+}
+
+.container {
+  padding: clamp(1rem, 10vmin, 6rem);
+  padding-bottom: 0;
+  font-family: g.$avenir-regular;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.logo {
+  height: 36px;
+}
+.mainbox {
+  display: flex;
+  flex: 1;
+}
+.illustration {
+  height: 36px;
+  flex: 0.5;
+  align-self: center;
+  height: 100%;
+}
+.form_container {
+  flex: 0.5;
+  padding: clamp(1rem, 10vmin, 6rem);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    font-family: g.$avenir-bold;
+    color: g.$primary-text-color;
+    font-size: 40px;
+  }
+
+  p {
+    font-family: g.$avenir-regular;
+    color: g.$secondary-text-color;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+
+  form {
+    flex: 1;
+    margin-top: 60px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .email {
+      position: relative;
+      width: 100%;
+      background: #ffffff;
+      border: 2px solid rgba(84, 95, 125, 0.15);
+      border-radius: 5px;
+
+      input {
+        width: 100%;
+        border: none;
+        padding: 16px;
+        font-size: 14px;
+        font-family: g.$avenir-regular;
+        outline-color: g.$tertiary-text-color;
+      }
+      button {
+        position: absolute;
+        right: 16px;
+        top: 0;
+        height: 100%;
+        border: none;
+        background: transparent;
+        font-weight: 600;
+        font-family: g.$avenir-regular;
+        color: g.$tertiary-text-color;
+      }
+    }
+
+    .password {
+      position: relative;
+      width: 100%;
+      background: #ffffff;
+      border: 2px solid rgba(84, 95, 125, 0.15);
+      border-radius: 5px;
+
+      input {
+        width: 100%;
+        border: none;
+        padding: 16px 65px 16px 16px;
+        font-size: 14px;
+        font-family: g.$avenir-regular;
+        outline-color: g.$tertiary-text-color;
+      }
+      button {
+        position: absolute;
+        right: 16px;
+        top: 0;
+        height: 100%;
+        border: none;
+        background: transparent;
+        font-weight: 600;
+        font-family: g.$avenir-regular;
+        color: g.$tertiary-text-color;
+      }
+    }
+
+    .forgot_password {
+      font-size: 12px;
+      color: g.$tertiary-text-color;
+      font-weight: 600;
+    }
+
+    .login_btn {
+      display: block;
+      color: g.$white;
+      font-weight: 600;
+      padding: 13px;
+      border: none;
+      background-color: g.$tertiary-text-color;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: g.$avenir-regular;
+      font-weight: 600;
+    }
+  }
+}
