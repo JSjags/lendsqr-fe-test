@@ -1,0 +1,9 @@
+@use "./global.scss" as g;
+
+.container {
+  background: g.$dashboard-bg;
+  min-height: calc(100vh - 100px);
+  position: relative;
+  left: calc(283px / 1440px * 100%);
+  width: calc(100% - 283px / 1440px * 100%);
+}

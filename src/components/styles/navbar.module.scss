@@ -1,0 +1,126 @@
+@use "../../styles/global.scss" as g;
+
+.container {
+  width: calc(283px / 1440px * 100%);
+  min-width: 240px;
+  position: fixed;
+  height: calc(100% - 100px);
+  left: 0;
+  top: 100px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.04);
+  background: g.$white;
+  font-family: g.$work-sans;
+  color: g.$primary-text-color;
+  overflow-y: scroll;
+}
+
+.uppersection {
+  display: flex;
+  flex-direction: column;
+  gap: 31px;
+}
+.section {
+  margin-top: 31px;
+}
+
+.section_header {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  padding-left: calc(30px / 1440px * 100vw);
+  color: g.$secondary-text-color;
+}
+
+.section_navlink_org {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin: 10px 0;
+  position: relative;
+  z-index: 10;
+  padding-left: calc(30px / 1440px * 100vw);
+  opacity: 1;
+  gap: 10px;
+
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: capitalize;
+    color: g.$primary-text-color;
+  }
+}
+.section_navlink {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin: 10px 0;
+  position: relative;
+  z-index: 10;
+  padding-left: calc(30px / 1440px * 100vw);
+  opacity: 0.4;
+  gap: 10px;
+
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: capitalize;
+    color: g.$primary-text-color;
+  }
+}
+.icon {
+  width: 16px;
+}
+
+.section_active_navlink {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin: 10px 0;
+  position: relative;
+  z-index: 10;
+  padding-left: calc(30px / 1440px * 100vw);
+  opacity: 1;
+  gap: 10px;
+  background: g.$active-nav-bg;
+
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: capitalize;
+    color: g.$primary-text-color;
+  }
+
+  ::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 3px;
+    height: 100%;
+    background: g.$tertiary-text-color;
+  }
+}
+
+.divider {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid g.$primary-text-color;
+  opacity: 0.1;
+  margin-top: 21px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.version {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: g.$primary-text-color;
+  padding-left: calc(30px / 1440px * 100vw);
+  margin-bottom: 20px;
+}
