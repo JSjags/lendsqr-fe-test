@@ -1,4 +1,4 @@
-@use "../../styles/global.scss" as g;
+@use "../../styles/global" as g;
 
 .container {
   width: calc(283px / 1440px * 100%);
@@ -12,6 +12,9 @@
   font-family: g.$work-sans;
   color: g.$primary-text-color;
   overflow-y: scroll;
+
+  @include g.mozilla-scrollbar;
+  @include g.custom-scrollbar;
 }
 
 .uppersection {
@@ -42,6 +45,8 @@
   padding-left: calc(30px / 1440px * 100vw);
   opacity: 1;
   gap: 10px;
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
 
   p {
     font-weight: 400;
@@ -49,6 +54,10 @@
     line-height: 19px;
     text-transform: capitalize;
     color: g.$primary-text-color;
+  }
+
+  &:hover {
+    background: g.$primary-hover-bg;
   }
 }
 .section_navlink {
@@ -59,8 +68,10 @@
   position: relative;
   z-index: 10;
   padding-left: calc(30px / 1440px * 100vw);
-  opacity: 0.4;
   gap: 10px;
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+  opacity: 0.4;
 
   p {
     font-weight: 400;
@@ -68,6 +79,11 @@
     line-height: 19px;
     text-transform: capitalize;
     color: g.$primary-text-color;
+  }
+
+  &:hover {
+    opacity: 1;
+    background: g.$primary-hover-bg;
   }
 }
 .icon {

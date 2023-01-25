@@ -16,8 +16,38 @@ $avenir-regular: Avenir-regular;
 $avenir-italic: Avenir-italic;
 $avenir-bold: Avenir-bold;
 $primary-text-color: #213f7d;
+$primary-text-color-light: rgba(#213f7d, 0.4);
 $secondary-text-color: #545f7d;
 $tertiary-text-color: #39cdcc;
 $active-nav-bg: rgba(#39cdcc, 0.06);
+$primary-hover-bg: rgba(#39cdcc, 0.06);
+$secondary-hover-bg: rgba(#545f7d, 0.06);
 $dashboard-bg: #fbfbfb;
 $white: #ffffff;
+
+@mixin mozilla-scrollbar {
+  scrollbar-color: $tertiary-text-color rgba(33, 63, 125, 0.1);
+  scrollbar-width: thin;
+}
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(33, 63, 125, 0.1);
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-corner {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 6px;
+    height: 6px;
+    background-color: $tertiary-text-color;
+    border-radius: 4px;
+  }
+}

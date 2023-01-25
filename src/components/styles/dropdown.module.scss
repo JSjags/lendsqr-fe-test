@@ -1,0 +1,26 @@
+@use "../../styles/global.scss" as g;
+
+.container {
+  padding: 7px 12px;
+  background-color: rgba(33, 63, 125, 0.1);
+  display: flex;
+  gap: 20px;
+  flex-wrap: nowrap;
+  border-radius: 4px;
+  display: inline-flex;
+  width: fit-content;
+  cursor: pointer;
+  transition: all 200ms ease;
+
+  &:hover {
+    background-color: rgba(33, 63, 125, 0.2);
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  p {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: g.$primary-text-color;
+  }
+}

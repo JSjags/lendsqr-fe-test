@@ -1,0 +1,9 @@
+@use "../../styles/global.scss" as g;
+
+.container {
+  padding: 7px 12px;
+  border-radius: 100px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+}

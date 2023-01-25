@@ -1,0 +1,170 @@
+@use "../../styles/global.scss" as g;
+
+.container {
+  width: 270px;
+  min-width: calc(270px / 1440px * 100%);
+  min-height: 500px;
+  background: #ffffff;
+  border: 1px solid rgba(84, 95, 125, 0.14);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  position: absolute;
+  top: 95px;
+  left: 20px;
+  padding: 30px 20px;
+  z-index: 100;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  div {
+    width: 100%;
+    color: g.$secondary-text-color;
+
+    label {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .input_cont {
+      position: relative;
+
+      input {
+        font-family: g.$work-sans;
+        color: g.$secondary-text-color;
+        background: g.$white;
+        border: 1px solid rgba(g.$primary-text-color, 0.2);
+        border-radius: 8px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        display: block;
+        width: 100%;
+        outline-color: g.$tertiary-text-color;
+        padding: 12px 20px;
+        position: relative;
+
+        &::-webkit-inner-spin-button {
+          display: none;
+        }
+
+        &::placeholder {
+          opacity: 0.7;
+          color: g.$secondary-text-color;
+        }
+
+        &::-webkit-calendar-picker-indicator {
+          background: url("/public/dashboard/calendar.svg");
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+
+        &::-webkit-datetime,
+        &::-webkit-datetime-edit-year-field,
+        &::-webkit-datetime-edit-month-field,
+        &::-webkit-datetime-edit-day-field,
+        &::-webkit-datetime-edit-ampm-field,
+        &::-webkit-datetime-edit-text {
+          display: none;
+        }
+
+        &::after {
+          display: none;
+          content: attr(data-content);
+          width: 100%;
+          padding: 12px 20px;
+          opacity: 0;
+          position: absolute;
+          left: 0;
+          right: 0;
+        }
+        // &::before {
+        //   content: attr(data-content);
+        //   width: 100%;
+        //   padding: 12px 20px;
+        //   //   opacity: 0;
+        //   position: absolute;
+        //   left: 0;
+        //   right: 0;
+        // }
+      }
+      input[type="date"]:before {
+        content: attr(placeholder) !important;
+        margin-right: 0.5em;
+      }
+      input[type="date"]:focus:before,
+      input[type="date"]:valid:before {
+        content: "";
+      }
+
+      img {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .form_buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+    color: g.$secondary-text-color;
+
+    .reset_btn {
+      font-family: g.$work-sans;
+      color: g.$secondary-text-color;
+      background: g.$white;
+      border: 1px solid g.$secondary-text-color;
+      border-radius: 8px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      outline-color: g.$tertiary-text-color;
+      padding: 12px 30px;
+      cursor: pointer;
+      transition: all 200ms ease;
+
+      &:hover {
+        filter: brightness(90%);
+      }
+    }
+    .filter_btn {
+      font-family: g.$work-sans;
+      color: g.$white;
+      background: g.$tertiary-text-color;
+      border: 1px solid g.$tertiary-text-color;
+      border-radius: 8px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      outline-color: g.$tertiary-text-color;
+      padding: 12px 30px;
+      cursor: pointer;
+      transition: all 200ms ease;
+
+      &:hover {
+        filter: brightness(90%);
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import styles from "./styles/navbar.module.scss";
-import navbarData from "../navbarData.json";
+import navbarData from "../data/navbarLinks.json";
 // import assets
 
 const Navbar = (): ReactElement => {

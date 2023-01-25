@@ -1,0 +1,22 @@
+[
+  {
+    "summary_name": "users",
+    "value": 2453,
+    "icon-bg-color": "rgba(223, 24, 255, 0.1)"
+  },
+  {
+    "summary_name": "active users",
+    "value": 2453,
+    "icon-bg-color": "rgba(87, 24, 255, 0.1)"
+  },
+  {
+    "summary_name": "users with loans",
+    "value": 12453,
+    "icon-bg-color": "rgba(245, 95, 68, 0.1)"
+  },
+  {
+    "summary_name": "users with savings",
+    "value": 102453,
+    "icon-bg-color": "rgba(255, 51, 102, 0.1)"
+  }
+]
