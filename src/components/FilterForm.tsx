@@ -31,8 +31,9 @@ const FilterForm: React.FC<filterProps> = ({ left, children }) => {
       className={styles.container}
       ref={filterFormRef}
       style={left + (300 / 1440) * 100 > 800 ? { left: left - 200 } : { left }}
+      data-testid="filter"
     >
-      <form className={styles.form}>
+      <form className={styles.form} data-testid="form">
         <div>
           <label htmlFor="organization">Organization</label>
           <div className={styles.input_cont}>

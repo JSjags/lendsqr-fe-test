@@ -106,238 +106,237 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <DashboardLayout>
+    <DashboardLayout data-testid="dashboard">
       {isLoading && (
         <div className={styles.container}>
           <p>Loading Users...</p>
         </div>
       )}
-      {users && users.length && (
-        <div className={styles.container} ref={pageRef}>
-          <p className={styles.page_title}>Users</p>
 
-          {/* Users summary section */}
-          <div className={styles.users_summary}>
-            {usersSummary.map((info, index) => (
-              <div key={index} className={styles.users_summary_card}>
-                <div
-                  className={styles.icon_cont}
-                  style={{ backgroundColor: info["icon-bg-color"] }}
-                >
-                  <img
-                    src={`/account_summary/${info.summary_name
-                      .toLocaleLowerCase()
-                      .split(" ")
-                      .join("-")}.svg`}
-                    alt="icon"
-                  />
-                </div>
-                <p className={styles.summary_title}>{info.summary_name}</p>
-                <p className={styles.summary_value}>
-                  {info.value.toLocaleString("en-US")}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Users table */}
-          <div className={styles.table_cont}>
-            <div className={styles.table}>
-              {/* Filter form */}
-              {showFilter.showFilter && (
-                <FilterForm left={filterPosition.current} />
-              )}
-
-              {/* Users table */}
-              <table cellSpacing={0}>
-                <tr>
-                  <th>
-                    <span
-                      onClick={(e) => handleFilter(e, "organization")}
-                      id="table_head"
-                    >
-                      organization
-                      <img src={tableHeadIcon} />
-                    </span>
-                  </th>
-                  <th>
-                    <span
-                      onClick={(e) => handleFilter(e, "username")}
-                      id="table_head"
-                    >
-                      username
-                      <img src={tableHeadIcon} />
-                    </span>
-                  </th>
-                  <th>
-                    <span
-                      onClick={(e) => handleFilter(e, "email")}
-                      id="table_head"
-                    >
-                      email
-                      <img src={tableHeadIcon} />
-                    </span>
-                  </th>
-                  <th>
-                    <span
-                      onClick={(e) => handleFilter(e, "phone number")}
-                      id="table_head"
-                    >
-                      phone number
-                      <img src={tableHeadIcon} />
-                    </span>
-                  </th>
-                  <th>
-                    <span
-                      onClick={(e) => handleFilter(e, "date joined")}
-                      id="table_head"
-                    >
-                      date joined
-                      <img src={tableHeadIcon} />
-                    </span>
-                  </th>
-                  <th>
-                    <span
-                      onClick={(e) => handleFilter(e, "status")}
-                      id="table_head"
-                    >
-                      status
-                      <img src={tableHeadIcon} />
-                    </span>
-                  </th>
-                  <th></th>
-                </tr>
-                <tbody>
-                  {users.map((user: userObject, index: number) => (
-                    <Fragment key={index}>
-                      <tr
-                        style={{
-                          boxShadow: "0 1px rgba(33, 63, 125, 0.1)",
-                        }}
-                      >
-                        <td>
-                          <span
-                            className={[styles.table_data, styles.orgName].join(
-                              " "
-                            )}
-                          >
-                            {user.orgName}
-                          </span>
-                        </td>
-                        <td>
-                          <span className={styles.table_data}>
-                            {user.userName}
-                          </span>
-                        </td>
-                        <td>
-                          <span className={styles.table_data}>
-                            {user.email}
-                          </span>
-                        </td>
-                        <td>
-                          <span className={styles.table_data}>
-                            {user.phoneNumber}
-                          </span>
-                        </td>
-                        <td>
-                          <span className={styles.table_data}>
-                            {formatDate(new Date(user.createdAt))}
-                          </span>
-                        </td>
-                        <td>
-                          <span className={styles.table_data}>
-                            <UserStatus />
-                          </span>
-                        </td>
-                        <td
-                          className={styles.action_btn_col}
-                          style={{ position: "relative" }}
-                        >
-                          {/* User menu */}
-                          {userMenu.menuId === index && userMenu.menuIsOpen && (
-                            <div className={styles.user_menu} id="user_menu">
-                              <Link to={`/dashboard/users/${index + 1}`}>
-                                <p>
-                                  <img src={viewIcon} alt="view" />
-                                  <span className={styles.link_text}>
-                                    View Details
-                                  </span>
-                                </p>
-                              </Link>
-                              <p>
-                                <img src={blaclistIcon} alt="blacklist" />
-                                <span>Blacklist User</span>
-                              </p>
-                              <p>
-                                <img src={activateIcon} alt="activate" />
-                                <span>Activate User</span>
-                              </p>
-                            </div>
-                          )}
-                          <button
-                            id="user_menu_btn"
-                            data-index={index}
-                            onClick={() => {
-                              currentUserMenuIndex.current = index;
-                              showFilter.showFilter &&
-                                setShowFilter({
-                                  currentTab: "",
-                                  showFilter: false,
-                                });
-                              setUserMenu(handleUserMenu(index, userMenu));
-                            }}
-                          >
-                            <img src={userDetailsIcon} alt="more details" />
-                          </button>
-                        </td>
-                      </tr>
-                    </Fragment>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Pagination Bar */}
-          <div className={styles.pagination_bar}>
-            <div>
-              <span>Showing</span> <Dropdown /> <span>out of 100</span>
-            </div>
-            <div className={styles.pagination_cont}>
-              <div
-                className={
-                  pageNumber === 1
-                    ? styles.pagination_btn
-                    : styles.pagination_btn_active
-                }
-              >
-                <img className={styles.left} src={caretDown} alt="previous" />
-              </div>
-              <div className={styles.page_num_cont}>
-                <button className={styles.page_num_btn_active}>1</button>
-                <button className={styles.page_num_btn}>2</button>
-                <span className={styles.ellipses}>...</span>
-                <button className={styles.page_num_btn}>4</button>
-                <button className={styles.page_num_btn}>5</button>
-              </div>
-              <div
-                className={
-                  pageNumber + 1 > pages
-                    ? styles.pagination_btn
-                    : styles.pagination_btn_active
-                }
-              >
-                <img className={styles.right} src={caretDown} alt="next" />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
       {error && (
         <div className={styles.container}>
           <p>{error}</p>
         </div>
       )}
+
+      {/* Display dashboard  */}
+      <div className={styles.container} ref={pageRef}>
+        <p className={styles.page_title}>Users</p>
+
+        {/* Users summary section */}
+        <div className={styles.users_summary}>
+          {usersSummary.map((info, index) => (
+            <div key={index} className={styles.users_summary_card}>
+              <div
+                className={styles.icon_cont}
+                style={{ backgroundColor: info["icon-bg-color"] }}
+              >
+                <img
+                  src={`/account_summary/${info.summary_name
+                    .toLocaleLowerCase()
+                    .split(" ")
+                    .join("-")}.svg`}
+                  alt="icon"
+                />
+              </div>
+              <p className={styles.summary_title}>{info.summary_name}</p>
+              <p className={styles.summary_value}>
+                {info.value.toLocaleString("en-US")}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Users table */}
+        <div className={styles.table_cont}>
+          <div className={styles.table}>
+            {/* Filter form */}
+            {showFilter.showFilter && (
+              <FilterForm left={filterPosition.current} />
+            )}
+
+            {/* Users table */}
+            <table cellSpacing={0} data-testid="users-table">
+              <tr>
+                <th>
+                  <span
+                    onClick={(e) => handleFilter(e, "organization")}
+                    id="table_head"
+                  >
+                    organization
+                    <img src={tableHeadIcon} />
+                  </span>
+                </th>
+                <th>
+                  <span
+                    onClick={(e) => handleFilter(e, "username")}
+                    id="table_head"
+                  >
+                    username
+                    <img src={tableHeadIcon} />
+                  </span>
+                </th>
+                <th>
+                  <span
+                    onClick={(e) => handleFilter(e, "email")}
+                    id="table_head"
+                  >
+                    email
+                    <img src={tableHeadIcon} />
+                  </span>
+                </th>
+                <th>
+                  <span
+                    onClick={(e) => handleFilter(e, "phone number")}
+                    id="table_head"
+                  >
+                    phone number
+                    <img src={tableHeadIcon} />
+                  </span>
+                </th>
+                <th>
+                  <span
+                    onClick={(e) => handleFilter(e, "date joined")}
+                    id="table_head"
+                  >
+                    date joined
+                    <img src={tableHeadIcon} />
+                  </span>
+                </th>
+                <th>
+                  <span
+                    onClick={(e) => handleFilter(e, "status")}
+                    id="table_head"
+                  >
+                    status
+                    <img src={tableHeadIcon} />
+                  </span>
+                </th>
+                <th></th>
+              </tr>
+              <tbody>
+                {users.map((user: userObject, index: number) => (
+                  <Fragment key={index}>
+                    <tr
+                      style={{
+                        boxShadow: "0 1px rgba(33, 63, 125, 0.1)",
+                      }}
+                    >
+                      <td>
+                        <span
+                          className={[styles.table_data, styles.orgName].join(
+                            " "
+                          )}
+                        >
+                          {user.orgName}
+                        </span>
+                      </td>
+                      <td>
+                        <span className={styles.table_data}>
+                          {user.userName}
+                        </span>
+                      </td>
+                      <td>
+                        <span className={styles.table_data}>{user.email}</span>
+                      </td>
+                      <td>
+                        <span className={styles.table_data}>
+                          {user.phoneNumber}
+                        </span>
+                      </td>
+                      <td>
+                        <span className={styles.table_data}>
+                          {formatDate(new Date(user.createdAt))}
+                        </span>
+                      </td>
+                      <td>
+                        <span className={styles.table_data}>
+                          <UserStatus />
+                        </span>
+                      </td>
+                      <td
+                        className={styles.action_btn_col}
+                        style={{ position: "relative" }}
+                      >
+                        {/* User menu */}
+                        {userMenu.menuId === index && userMenu.menuIsOpen && (
+                          <div className={styles.user_menu} id="user_menu">
+                            <Link to={`/dashboard/users/${index + 1}`}>
+                              <p>
+                                <img src={viewIcon} alt="view" />
+                                <span className={styles.link_text}>
+                                  View Details
+                                </span>
+                              </p>
+                            </Link>
+                            <p>
+                              <img src={blaclistIcon} alt="blacklist" />
+                              <span>Blacklist User</span>
+                            </p>
+                            <p>
+                              <img src={activateIcon} alt="activate" />
+                              <span>Activate User</span>
+                            </p>
+                          </div>
+                        )}
+                        <button
+                          id="user_menu_btn"
+                          data-index={index}
+                          onClick={() => {
+                            currentUserMenuIndex.current = index;
+                            showFilter.showFilter &&
+                              setShowFilter({
+                                currentTab: "",
+                                showFilter: false,
+                              });
+                            setUserMenu(handleUserMenu(index, userMenu));
+                          }}
+                        >
+                          <img src={userDetailsIcon} alt="more details" />
+                        </button>
+                      </td>
+                    </tr>
+                  </Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Pagination Bar */}
+        <div className={styles.pagination_bar}>
+          <div>
+            <span>Showing</span> <Dropdown /> <span>out of 100</span>
+          </div>
+          <div className={styles.pagination_cont}>
+            <div
+              className={
+                pageNumber === 1
+                  ? styles.pagination_btn
+                  : styles.pagination_btn_active
+              }
+            >
+              <img className={styles.left} src={caretDown} alt="previous" />
+            </div>
+            <div className={styles.page_num_cont}>
+              <button className={styles.page_num_btn_active}>1</button>
+              <button className={styles.page_num_btn}>2</button>
+              <span className={styles.ellipses}>...</span>
+              <button className={styles.page_num_btn}>4</button>
+              <button className={styles.page_num_btn}>5</button>
+            </div>
+            <div
+              className={
+                pageNumber + 1 > pages
+                  ? styles.pagination_btn
+                  : styles.pagination_btn_active
+              }
+            >
+              <img className={styles.right} src={caretDown} alt="next" />
+            </div>
+          </div>
+        </div>
+      </div>
     </DashboardLayout>
   );
 };

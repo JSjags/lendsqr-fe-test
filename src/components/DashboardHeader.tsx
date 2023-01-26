@@ -9,9 +9,9 @@ import { Link } from "react-router-dom";
 
 const DashboardHeader: Function = (): ReactElement => {
   return (
-    <div className={styles.container}>
-      <img className="logo" src={Logo} />
-      <div className={styles.searchbox}>
+    <div className={styles.container} data-testid="header">
+      <img className="logo" src={Logo} alt="lendsqr-logo" />
+      <div className={styles.searchbox} data-testid="search-box">
         <input type="text" name="search" placeholder="Search for anything" />
         <button>
           <img src={searchIcon} alt="search-icon" />

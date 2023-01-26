@@ -6,7 +6,7 @@ import navbarData from "../data/navbarLinks.json";
 const Navbar = (): ReactElement => {
   const getIcon: Function = (): string => ``;
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="navbar">
       <div className={styles.uppersection}>
         <div className={styles.section_navlink_org}>
           <img

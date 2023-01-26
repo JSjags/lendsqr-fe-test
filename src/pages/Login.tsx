@@ -7,8 +7,19 @@ import { handleLogin } from "../lib/login";
 
 const Login = () => {
   const navigate = useNavigate();
+
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [inputType, setInputType] = useState("password");
+
+  const handleShowPassword: CallableFunction = (e: Event): void => {
+    e.preventDefault();
+    if (password.length < 1) return;
+    inputType === "password" ? setInputType("text") : setInputType("password");
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="login">
       <header>
         <img
           className={styles.logo}
@@ -29,16 +40,25 @@ const Login = () => {
 
           <form>
             <div className={styles.email}>
-              <input type="email" name="email" id="email" placeholder="Email" />
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
             </div>
             <div className={styles.password}>
               <input
-                type="password"
+                type={inputType}
                 name="password"
                 id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
               />
-              <button>SHOW</button>
+              <button onClick={(e) => handleShowPassword(e)}>SHOW</button>
             </div>
             <p className={styles.forgot_password}>FORGOT PASSWORD?</p>
             <button

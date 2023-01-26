@@ -19,6 +19,7 @@ const UserStatus: Function = (): ReactElement => {
           ...handleStatusStyles(accountStatus[randomNumber.current]),
           backgroundColor: "transparent",
         }}
+        data-testid="status"
       >
         {accountStatus[randomNumber.current]}
       </span>
