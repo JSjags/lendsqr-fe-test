@@ -1,3 +1,4 @@
+import { useState } from "react";
 import DashboardLayout from "../layouts/DashboardLayout";
 import { Link, useParams } from "react-router-dom";
 import { useFetchUserDetails } from "../hooks/useFetchUserDetails";
@@ -5,11 +6,16 @@ import styles from "../styles/user-details.module.scss";
 import backArrow from "../assets/dashboard/back-arrow.svg";
 import filledStar from "../assets/dashboard/filled-star.svg";
 import emptyStar from "../assets/dashboard/empty-star.svg";
+import userDetailsTabs from "../data/userDetailsTabs.json";
 
 const UserDetails = () => {
   const { userId } = useParams();
   const { userDetails, isLoading, error } = useFetchUserDetails(userId);
-  console.log(userDetails);
+  const [currentTab, setCurrentTab] = useState("General Details");
+
+  const handleTabClick: Function = (tab: string): void => {
+    setCurrentTab(tab);
+  };
 
   return (
     <DashboardLayout>
@@ -68,269 +74,294 @@ const UserDetails = () => {
               </div>
             </div>
             <div className={styles.tabs}>
-              <p className={[styles.tab_item, styles.active_tab].join(" ")}>
-                General Details
-              </p>
-              <p className={styles.tab_item}>Documents</p>
-              <p className={styles.tab_item}>Bank Details</p>
-              <p className={styles.tab_item}>Loans</p>
-              <p className={styles.tab_item}>Savings</p>
-              <p className={styles.tab_item}>Apps and System</p>
+              {userDetailsTabs.map((tab, index) => (
+                <p
+                  key={index}
+                  onClick={() => handleTabClick(tab)}
+                  className={
+                    currentTab === tab
+                      ? [styles.tab_item, styles.active_tab].join(" ")
+                      : styles.tab_item
+                  }
+                >
+                  {tab}
+                </p>
+              ))}
             </div>
           </div>
-          <div className={styles.profile_bottom}>
-            {/* Personal Information */}
-            <div className={styles.section}>
-              <p className={styles.section_title}>Personal Information</p>
-              <div className={styles.section_items_cont}>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Full name</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={`${userDetails.profile.firstName} ${userDetails.profile.lastName}`}
-                  >{`${userDetails.profile.firstName} ${userDetails.profile.lastName}`}</div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Phone Number</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={userDetails.phoneNumber}
-                  >
-                    {userDetails.phoneNumber}
+          {currentTab === "General Details" ? (
+            <div className={styles.profile_bottom}>
+              {/* Personal Information */}
+              <div className={styles.section}>
+                <p className={styles.section_title}>Personal Information</p>
+                <div className={styles.section_items_cont}>
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>Full name</div>
+                    <div
+                      className={styles.section_item_value}
+                      title={`${userDetails.profile.firstName} ${userDetails.profile.lastName}`}
+                    >{`${userDetails.profile.firstName} ${userDetails.profile.lastName}`}</div>
                   </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Email</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={userDetails.email}
-                  >
-                    {userDetails.email}
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Phone Number
+                    </div>
+                    <div
+                      className={styles.section_item_value}
+                      title={userDetails.phoneNumber}
+                    >
+                      {userDetails.phoneNumber}
+                    </div>
                   </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>BVN</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={userDetails.profile.bvn}
-                  >
-                    {userDetails.profile.bvn}
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>Email</div>
+                    <div
+                      className={styles.section_item_value}
+                      title={userDetails.email}
+                    >
+                      {userDetails.email}
+                    </div>
                   </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Gender</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={userDetails.profile.gender}
-                  >
-                    {userDetails.profile.gender}
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>BVN</div>
+                    <div
+                      className={styles.section_item_value}
+                      title={userDetails.profile.bvn}
+                    >
+                      {userDetails.profile.bvn}
+                    </div>
                   </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>
-                    Marital Status
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>Gender</div>
+                    <div
+                      className={styles.section_item_value}
+                      title={userDetails.profile.gender}
+                    >
+                      {userDetails.profile.gender}
+                    </div>
                   </div>
-                  <div className={styles.section_item_value} title="Single">
-                    Single
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Marital Status
+                    </div>
+                    <div className={styles.section_item_value} title="Single">
+                      Single
+                    </div>
                   </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Children</div>
-                  <div className={styles.section_item_value} title="None">
-                    None
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>Children</div>
+                    <div className={styles.section_item_value} title="None">
+                      None
+                    </div>
                   </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>
-                    Type of Residence
-                  </div>
-                  <div
-                    className={styles.section_item_value}
-                    title="Parent's Apartment"
-                  >
-                    Parent's Apartment
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Education and Employment */}
-            <div className={styles.section}>
-              <p className={styles.section_title}>Personal Information</p>
-              <div className={styles.section_items_cont}>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>
-                    Level of Education
-                  </div>
-                  <div
-                    className={styles.section_item_value}
-                    title={`${userDetails.education.level} ${userDetails.profile.lastName}`}
-                  >{`${userDetails.education.level} ${userDetails.profile.lastName}`}</div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>
-                    Employment Status
-                  </div>
-                  <div
-                    className={styles.section_item_value}
-                    title={userDetails.education.employmentStatus}
-                  >
-                    {userDetails.education.employmentStatus}
-                  </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>
-                    Duration of Employment
-                  </div>
-                  <div
-                    className={styles.section_item_value}
-                    title={userDetails.education.duration}
-                  >
-                    {userDetails.education.duration}
-                  </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Office email</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={userDetails.education.officeEmail}
-                  >
-                    {userDetails.education.officeEmail}
-                  </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>
-                    Monthly Income
-                  </div>
-                  <div
-                    className={styles.section_item_value}
-                    title={`₦${userDetails.education.monthlyIncome[0]}} - ₦${userDetails.education.monthlyIncome[0]}`}
-                  >
-                    {`₦${userDetails.education.monthlyIncome[0]}} - ₦${userDetails.education.monthlyIncome[0]}`}
-                  </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>
-                    Loan Repayment
-                  </div>
-                  <div
-                    className={styles.section_item_value}
-                    title={`₦${userDetails.education.loanRepayment}`}
-                  >{`₦${userDetails.education.loanRepayment}`}</div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Children</div>
-                  <div className={styles.section_item_value} title="None">
-                    None
-                  </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>
-                    Type of Residence
-                  </div>
-                  <div
-                    className={styles.section_item_value}
-                    title="Parent's Apartment"
-                  >
-                    Parent's Apartment
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Type of Residence
+                    </div>
+                    <div
+                      className={styles.section_item_value}
+                      title="Parent's Apartment"
+                    >
+                      Parent's Apartment
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+              <hr className={styles.divider} />
 
-            {/* Social handles */}
-            <div className={styles.section}>
-              <p className={styles.section_title}>Socials</p>
-              <div className={styles.section_items_cont}>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Twitter</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={userDetails.socials.twitter}
-                  >
-                    {userDetails.socials.twitter}
+              {/* Education and Employment */}
+              <div className={styles.section}>
+                <p className={styles.section_title}>Personal Information</p>
+                <div className={styles.section_items_cont}>
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Level of Education
+                    </div>
+                    <div
+                      className={styles.section_item_value}
+                      title={`${userDetails.education.level} ${userDetails.profile.lastName}`}
+                    >{`${userDetails.education.level} ${userDetails.profile.lastName}`}</div>
                   </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Facebook</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={userDetails.socials.facebook}
-                  >
-                    {userDetails.socials.facebook}
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Employment Status
+                    </div>
+                    <div
+                      className={styles.section_item_value}
+                      title={userDetails.education.employmentStatus}
+                    >
+                      {userDetails.education.employmentStatus}
+                    </div>
                   </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Instagram</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={userDetails.socials.instagram}
-                  >
-                    {userDetails.socials.instagram}
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Duration of Employment
+                    </div>
+                    <div
+                      className={styles.section_item_value}
+                      title={userDetails.education.duration}
+                    >
+                      {userDetails.education.duration}
+                    </div>
+                  </div>
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Office email
+                    </div>
+                    <div
+                      className={styles.section_item_value}
+                      title={userDetails.education.officeEmail}
+                    >
+                      {userDetails.education.officeEmail}
+                    </div>
+                  </div>
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Monthly Income
+                    </div>
+                    <div
+                      className={styles.section_item_value}
+                      title={`₦${userDetails.education.monthlyIncome[1]} - ₦${userDetails.education.monthlyIncome[0]}`}
+                    >
+                      {`₦${userDetails.education.monthlyIncome[1]} - ₦${userDetails.education.monthlyIncome[0]}`}
+                    </div>
+                  </div>
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Loan Repayment
+                    </div>
+                    <div
+                      className={styles.section_item_value}
+                      title={`₦${userDetails.education.loanRepayment}`}
+                    >{`₦${userDetails.education.loanRepayment}`}</div>
+                  </div>
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>Children</div>
+                    <div className={styles.section_item_value} title="None">
+                      None
+                    </div>
+                  </div>
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Type of Residence
+                    </div>
+                    <div
+                      className={styles.section_item_value}
+                      title="Parent's Apartment"
+                    >
+                      Parent's Apartment
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+              <hr className={styles.divider} />
 
-            {/* Guarantors */}
-            <div className={styles.section}>
-              <p className={styles.section_title}>Socials</p>
-              <div className={styles.section_items_cont}>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Full Name</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={`${userDetails.guarantor.firstName} ${userDetails.guarantor.lastName}`}
-                  >
-                    {`${userDetails.guarantor.firstName} ${userDetails.guarantor.lastName}`}
+              {/* Social handles */}
+              <div className={styles.section}>
+                <p className={styles.section_title}>Socials</p>
+                <div className={styles.section_items_cont}>
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>Twitter</div>
+                    <div
+                      className={styles.section_item_value}
+                      title={userDetails.socials.twitter}
+                    >
+                      {userDetails.socials.twitter}
+                    </div>
+                  </div>
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>Facebook</div>
+                    <div
+                      className={styles.section_item_value}
+                      title={userDetails.socials.facebook}
+                    >
+                      {userDetails.socials.facebook}
+                    </div>
+                  </div>
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>Instagram</div>
+                    <div
+                      className={styles.section_item_value}
+                      title={userDetails.socials.instagram}
+                    >
+                      {userDetails.socials.instagram}
+                    </div>
                   </div>
                 </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Phone Number</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={userDetails.guarantor.phoneNumber}
-                  >
-                    {userDetails.guarantor.phoneNumber}
+              </div>
+              <hr className={styles.divider} />
+
+              {/* Guarantors */}
+              <div className={styles.section}>
+                <p className={styles.section_title}>Socials</p>
+                <div className={styles.section_items_cont}>
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>Full Name</div>
+                    <div
+                      className={styles.section_item_value}
+                      title={`${userDetails.guarantor.firstName} ${userDetails.guarantor.lastName}`}
+                    >
+                      {`${userDetails.guarantor.firstName} ${userDetails.guarantor.lastName}`}
+                    </div>
                   </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Email Address</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={
-                      userDetails.guarantor.email
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Phone Number
+                    </div>
+                    <div
+                      className={styles.section_item_value}
+                      title={userDetails.guarantor.phoneNumber}
+                    >
+                      {userDetails.guarantor.phoneNumber}
+                    </div>
+                  </div>
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Email Address
+                    </div>
+                    <div
+                      className={styles.section_item_value}
+                      title={
+                        userDetails.guarantor.email
+                          ? userDetails.guarantor.email
+                          : userDetails.guarantor.lastName +
+                            userDetails.guarantor.firstName +
+                            "@hotmail.com"
+                      }
+                    >
+                      {userDetails.guarantor.email
                         ? userDetails.guarantor.email
                         : userDetails.guarantor.lastName +
                           userDetails.guarantor.firstName +
-                          "@hotmail.com"
-                    }
-                  >
-                    {userDetails.guarantor.email
-                      ? userDetails.guarantor.email
-                      : userDetails.guarantor.lastName +
-                        userDetails.guarantor.firstName +
-                        "@hotmail.com"}
+                          "@hotmail.com"}
+                    </div>
                   </div>
-                </div>
-                <div className={styles.section_item}>
-                  <div className={styles.section_item_title}>Relationship</div>
-                  <div
-                    className={styles.section_item_value}
-                    title={
-                      userDetails.guarantor.gender === "Male"
+                  <div className={styles.section_item}>
+                    <div className={styles.section_item_title}>
+                      Relationship
+                    </div>
+                    <div
+                      className={styles.section_item_value}
+                      title={
+                        userDetails.guarantor.gender === "Male"
+                          ? "Brother"
+                          : "Sister"
+                      }
+                    >
+                      {userDetails.guarantor.gender === "Male"
                         ? "Brother"
-                        : "Sister"
-                    }
-                  >
-                    {userDetails.guarantor.gender === "Male"
-                      ? "Brother"
-                      : "Sister"}
+                        : "Sister"}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className={styles.profile_bottom}>
+              {/* No Data */}
+              <p className={styles.no_data}>No Data to show</p>
+            </div>
+          )}
         </div>
       )}
       {error && (
