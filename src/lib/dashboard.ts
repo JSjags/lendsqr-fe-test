@@ -61,7 +61,7 @@ const handleUserMenu: Function = (
   if (menuIsOpen && id !== menuId) {
     menuObject = {
       menuIsOpen: false,
-      menuId: "43",
+      menuId: "null",
     };
   }
   if ((menuIsOpen && id !== menuId) || (!menuIsOpen && menuId == null)) {

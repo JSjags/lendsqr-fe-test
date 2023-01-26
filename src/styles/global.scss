@@ -19,11 +19,13 @@ $primary-text-color: #213f7d;
 $primary-text-color-light: rgba(#213f7d, 0.4);
 $secondary-text-color: #545f7d;
 $tertiary-text-color: #39cdcc;
+$red-text-color: #e4033b;
 $active-nav-bg: rgba(#39cdcc, 0.06);
 $primary-hover-bg: rgba(#39cdcc, 0.06);
 $secondary-hover-bg: rgba(#545f7d, 0.06);
 $dashboard-bg: #fbfbfb;
 $white: #ffffff;
+$black: #000000;
 
 @mixin mozilla-scrollbar {
   scrollbar-color: $tertiary-text-color rgba(33, 63, 125, 0.1);

@@ -33,9 +33,9 @@ const Dashboard = () => {
     showFilter: boolean;
   }>({ currentTab: "", showFilter: false });
   const currentUserMenuIndex: { current: null | number } = useRef(null);
-  const { users, pages, isLoading, error } = useFetchUsers();
   const filterPosition = useRef(20);
   const pageRef: any = useRef(null);
+  const { users, pages, isLoading, error } = useFetchUsers();
 
   const handleFilter: Function = (e: any, currentTab: string): void => {
     userMenu.menuIsOpen && setUserMenu({ menuId: null, menuIsOpen: false });
@@ -114,7 +114,7 @@ const Dashboard = () => {
       )}
       {users && users.length && (
         <div className={styles.container} ref={pageRef}>
-          <p>Users</p>
+          <p className={styles.page_title}>Users</p>
 
           {/* Users summary section */}
           <div className={styles.users_summary}>
@@ -256,7 +256,7 @@ const Dashboard = () => {
                           {/* User menu */}
                           {userMenu.menuId === index && userMenu.menuIsOpen && (
                             <div className={styles.user_menu} id="user_menu">
-                              <Link to={`/dashboard/users/${index}`}>
+                              <Link to={`/dashboard/users/${index + 1}`}>
                                 <p>
                                   <img src={viewIcon} alt="view" />
                                   <span className={styles.link_text}>

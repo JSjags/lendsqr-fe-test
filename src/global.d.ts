@@ -35,6 +35,7 @@ export type userMenuState = [
   setUserMenu: Function
 ];
 export type usersState = [users: object[] | null, setUsers: Function];
+export type userDetailsState = [users: object | null, setUsers: Function];
 export interface filterProps {
   left: number;
   children?: ReactNode;
