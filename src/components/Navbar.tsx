@@ -1,12 +1,14 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import styles from "./styles/navbar.module.scss";
 import navbarData from "../data/navbarLinks.json";
-// import assets
+import { Link } from "react-router-dom";
 
-const Navbar = (): ReactElement => {
-  const getIcon: Function = (): string => ``;
+const Navbar = ({ navState }: { navState: boolean }): ReactElement => {
   return (
-    <div className={styles.container} data-testid="navbar">
+    <div
+      className={navState ? styles.container : styles.nav_closed}
+      data-testid="navbar"
+    >
       <div className={styles.uppersection}>
         <div className={styles.section_navlink_org}>
           <img
@@ -50,7 +52,9 @@ const Navbar = (): ReactElement => {
       <hr className={styles.divider} />
       <div className={styles.section_navlink_org}>
         <img className={styles.icon} src={`/navbar/logout.svg`} />
-        <p>Logout</p>
+        <Link to={"/login"}>
+          <p className={styles.logout}>Logout</p>
+        </Link>
       </div>
       <p className={styles.version}>v1.2.0</p>
     </div>

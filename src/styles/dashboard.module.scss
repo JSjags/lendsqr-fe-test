@@ -1,18 +1,41 @@
 @use "./global.scss" as g;
 
-.container {
+.superior_cont {
+  width: calc(100% - clamp(240px, calc(283px / 1440px * 100%), 500px));
   background: g.$dashboard-bg;
-  height: calc(100vh - 100px);
+  flex: 1;
+  height: fit-content;
+}
+
+.container {
   position: relative;
-  left: calc(283px / 1440px * 100%);
-  width: calc(100% - 283px / 1440px * 100%);
-  padding: calc(60px / 1440px * 100%);
+  padding: calc(60px / 1440px * 100%) calc(60px / 1440px * 100%)
+    calc(90px / 1440px * 100%) calc(60px / 1440px * 100%);
   font-family: g.$work-sans;
   color: g.$primary-text-color;
-  overflow-y: scroll;
+}
 
-  @include g.mozilla-scrollbar;
-  @include g.custom-scrollbar;
+.menu_btn {
+  position: sticky;
+  left: 0;
+  top: 0;
+  width: fit-content;
+  background: g.$white;
+  z-index: 100;
+  padding: 10px;
+  border-radius: 4px 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(g.$secondary-text-color, 0.06);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.06);
+  display: block;
+  cursor: pointer;
+  transition: all 300ms ease;
+
+  &:hover {
+    filter: brightness(95%);
+  }
 }
 
 .page_title {
@@ -20,6 +43,14 @@
   font-size: 24px;
   line-height: 28px;
 }
+.users_summary_cont {
+  width: 100%;
+  overflow-x: scroll;
+
+  @include g.mozilla-scrollbar;
+  @include g.tabs-scrollbar;
+}
+
 .users_summary {
   display: flex;
   justify-content: space-between;
@@ -27,7 +58,7 @@
   margin-top: 40px;
 }
 .users_summary_card {
-  width: calc(240px / 1440px * 100vw);
+  width: clamp(150px, calc(240px / 1440px * 100vw), 250px);
   height: 160px;
   background: #ffffff;
   border: 1px solid rgba(33, 63, 125, 0.06);
@@ -110,7 +141,7 @@
     }
 
     th {
-      max-width: 100px;
+      max-width: 120px;
       overflow: hidden;
       padding: 44px 0 14px 0;
       position: sticky;
@@ -122,7 +153,7 @@
         display: flex;
         width: 100%;
         font-weight: 600;
-        font-size: 12px;
+        font-size: clamp(10px, 1vmax, 12px);
         line-height: 14px;
         text-transform: uppercase;
         text-align: left;
@@ -135,9 +166,10 @@
         border-radius: 4px;
         transition: all 200ms ease;
         cursor: pointer;
+        align-items: center;
 
         img {
-          width: 16px;
+          width: clamp(12px, 1.2vmax, 16px);
         }
 
         &:hover {
@@ -171,7 +203,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: 14px;
+        font-size: clamp(12px, 1vmax, 14px);
         color: g.$secondary-text-color;
       }
     }
@@ -193,6 +225,7 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   span {
     font-weight: 400;
@@ -362,6 +395,14 @@
 
     span {
       color: g.$secondary-text-color;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .pagination_bar {
+    div {
+      margin: 0 auto;
     }
   }
 }

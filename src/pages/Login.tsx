@@ -24,7 +24,7 @@ const Login = () => {
         <img
           className={styles.logo}
           src={logo}
-          alt="logo"
+          alt="lendsqr-logo"
           aria-label="Lendsqr"
         />
       </header>
@@ -47,6 +47,7 @@ const Login = () => {
                 placeholder="Email"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
+                data-testid={"username"}
               />
             </div>
             <div className={styles.password}>
@@ -57,6 +58,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
+                data-testid={"password"}
               />
               <button onClick={(e) => handleShowPassword(e)}>SHOW</button>
             </div>
@@ -64,6 +66,7 @@ const Login = () => {
             <button
               onClick={(e) => handleLogin(e, navigate)}
               className={styles.login_btn}
+              data-testid={"login-btn"}
             >
               LOG IN
             </button>

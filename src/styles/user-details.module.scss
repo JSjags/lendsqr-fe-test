@@ -1,22 +1,42 @@
 @use "./global.scss" as g;
 
+.superior_cont {
+  width: calc(100% - clamp(240px, calc(283px / 1440px * 100%), 500px));
+  height: fit-content;
+  flex: 1;
+}
 .container {
-  background: g.$dashboard-bg;
-  height: calc(100vh - 100px);
   position: relative;
-  left: calc(283px / 1440px * 100%);
-  width: calc(100% - 283px / 1440px * 100%);
   padding: calc(60px / 1440px * 100%);
   font-family: g.$work-sans;
   color: g.$primary-text-color;
-  overflow-y: scroll;
 
   a {
     text-decoration: none;
   }
+}
 
-  @include g.mozilla-scrollbar;
-  @include g.custom-scrollbar;
+.menu_btn {
+  position: sticky;
+  left: 0;
+  top: 0;
+  width: fit-content;
+  background: g.$white;
+  z-index: 100;
+  padding: 10px;
+  border-radius: 0 4px 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(g.$secondary-text-color, 0.06);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.06);
+  display: block;
+  cursor: pointer;
+  transition: all 300ms ease;
+
+  &:hover {
+    filter: brightness(95%);
+  }
 }
 
 .back_btn {
@@ -51,11 +71,12 @@
 }
 .status_btns {
   display: flex;
+  justify-content: space-between;
   gap: 20px;
 
   button {
     border-radius: 8px;
-    padding: 12px 16px;
+    padding: 12px clamp(8px, calc(16px / 1440px * 100vw), 16px);
     font-weight: 600;
     font-size: 14px;
     line-height: 16px;
@@ -90,6 +111,7 @@
   border-radius: 4px;
   margin-top: 50px;
   position: relative;
+  overflow: hidden;
 }
 .profile_top {
   padding: 30px;
@@ -105,12 +127,16 @@
 .profile_top_info {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 30px;
+  margin-bottom: 50px;
 }
 .profile_name_cont {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 100px;
 
   .profile_name {
     color: g.$primary-text-color;
@@ -133,6 +159,7 @@
   position: relative;
   align-items: center;
   justify-content: center;
+  min-width: 100px;
 
   &::before,
   &::after {
@@ -169,6 +196,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 100px;
 }
 .account_bal {
   color: g.$primary-text-color;
@@ -182,15 +210,22 @@
   font-size: 12px;
   line-height: 14px;
 }
-.tabs {
+.tabs_cont {
+  width: 100%;
+  overflow-x: scroll;
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 0 30px;
+
+  @include g.mozilla-scrollbar;
+  @include g.tabs-scrollbar;
+}
+.tabs {
+  padding: 0 calc(30px / 1440px * 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: clamp(720px, 100%, 1440px);
 }
 .tab_item {
   font-weight: 400;
@@ -249,7 +284,7 @@
   row-gap: 30px;
 }
 .section_item {
-  width: clamp(100px, 20%, 150%);
+  width: clamp(200px, 20%, 250px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -287,4 +322,31 @@
   width: 80%;
   margin: 30px auto 0;
   text-align: center;
+}
+
+@media screen and (max-width: 640px) {
+  .status_btns {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: clamp(200px, 100%, 400px);
+
+    button {
+      border-radius: 8px;
+      padding: 12px clamp(8px, calc(16px / 1440px * 100vw), 16px);
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 14px;
+      text-align: center;
+      text-transform: uppercase;
+      font-family: g.$work-sans;
+      background: g.$white;
+      transition: all 300ms ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        filter: brightness(95%);
+      }
+    }
+  }
 }

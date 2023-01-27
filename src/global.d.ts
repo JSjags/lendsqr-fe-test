@@ -7,7 +7,11 @@ export type Renderable =
   | ReactElement
   | Renderable[];
 
-export type ChildrenProps = { children: Renderable };
+export type ChildrenProps = {
+  children: Renderable;
+  navState: boolean;
+  handleMenuBtn: Function;
+};
 
 export type userObject = {
   orgName: string;

@@ -2,4 +2,17 @@
 
 .container {
   position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  main {
+    display: flex;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100vh - 100px);
+
+    @include g.mozilla-scrollbar;
+    @include g.custom-scrollbar;
+  }
 }

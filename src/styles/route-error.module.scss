@@ -1,0 +1,45 @@
+@use "./global.scss" as g;
+
+.superior_cont {
+  width: calc(100% - clamp(240px, calc(283px / 1440px * 100%), 500px));
+  background: g.$dashboard-bg;
+  flex: 1;
+  height: fit-content;
+}
+
+.container {
+  position: relative;
+  padding: calc(60px / 1440px * 100%) calc(60px / 1440px * 100%)
+    calc(90px / 1440px * 100%) calc(60px / 1440px * 100%);
+  font-family: g.$work-sans;
+  color: g.$primary-text-color;
+}
+
+.menu_btn {
+  position: sticky;
+  left: 0;
+  top: 0;
+  width: fit-content;
+  background: g.$white;
+  z-index: 100;
+  padding: 10px;
+  border-radius: 4px 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(g.$secondary-text-color, 0.06);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.06);
+  display: block;
+  cursor: pointer;
+  transition: all 300ms ease;
+
+  &:hover {
+    filter: brightness(95%);
+  }
+}
+
+.page_title {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}

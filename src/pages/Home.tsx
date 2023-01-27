@@ -8,7 +8,7 @@ const Home: Function = (): ReactElement => {
     navigate("/login");
   }, []);
 
-  return <div>Redirecting to login Page.</div>;
+  return <div data-testid="home-redirect">Redirecting to login Page.</div>;
 };
 
 export default Home;

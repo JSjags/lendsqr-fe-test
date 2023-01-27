@@ -5,7 +5,7 @@ import caretDown from "../assets/dashboard/caret-down.svg";
 const Dropdown = () => {
   return (
     <div className={styles.container} data-testid="dropdown">
-      <p data-testId="value">100</p>
+      <p data-testid="value">100</p>
       <img src={caretDown} alt="caret-down" />
     </div>
   );

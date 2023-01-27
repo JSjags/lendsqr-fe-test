@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import UserDetails from "./pages/UserDetails";
 import "./styles/global.scss";
+import RouteError from "./pages/RouteError";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/users/:userId" element={<UserDetails />} />
-        {/* <Route path='/login' element={<Login />}/> */}
+        <Route path="/*" element={<RouteError />} />
       </Routes>
     </Router>
   );

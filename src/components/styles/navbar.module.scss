@@ -3,15 +3,35 @@
 .container {
   width: calc(283px / 1440px * 100%);
   min-width: 240px;
-  position: fixed;
-  height: calc(100% - 100px);
+  position: sticky;
+  height: calc(100vh - 100px);
   left: 0;
-  top: 100px;
+  top: 0;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.04);
   background: g.$white;
   font-family: g.$work-sans;
   color: g.$primary-text-color;
   overflow-y: scroll;
+  z-index: 1000;
+  transition: all 300ms ease-in-out;
+
+  @include g.mozilla-scrollbar;
+  @include g.custom-scrollbar;
+}
+
+.nav_closed {
+  width: 0;
+  position: sticky;
+  height: calc(100vh - 100px);
+  left: 0;
+  top: 0;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.04);
+  background: g.$white;
+  font-family: g.$work-sans;
+  color: g.$primary-text-color;
+  overflow-y: scroll;
+  z-index: 1000;
+  transition: all 300ms ease-in-out;
 
   @include g.mozilla-scrollbar;
   @include g.custom-scrollbar;
@@ -47,6 +67,10 @@
   gap: 10px;
   transition: all 200ms ease-in-out;
   cursor: pointer;
+
+  a {
+    text-decoration: none;
+  }
 
   p {
     font-weight: 400;
