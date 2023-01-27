@@ -51,7 +51,7 @@ const RouteError = () => {
         )}
         <div className={styles.container} ref={pageRef}>
           <p className={styles.page_title} data-testid="route error">
-            OOOPs, We couldn't find that page.{" "}
+            OOOPs, We couldn't find that page.
           </p>
         </div>
       </div>
