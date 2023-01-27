@@ -158,7 +158,7 @@ const Dashboard = () => {
               onClick={() => handleMenuBtn()}
               title="Menu"
             >
-              <img src={menuBtn} alt="" />
+              {/* <img src={menuBtn} alt="" /> */}
             </button>
           )}
           <div className={styles.container} ref={pageRef}>
