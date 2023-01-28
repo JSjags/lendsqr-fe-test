@@ -14,15 +14,7 @@ Lendsqr frontend engineering test built with **React**, **Typescript**, **SCSS**
 
 # Demo
 
-<iframe
-    width="640"
-    height="480"
-    src="https://www.youtube.com/embed/GkZTeKZgwqc"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen
->
-</iframe>
+[![Lendsqr Frontend Engineer Assessment Video Demo](https://res.cloudinary.com/duiyqqc0n/image/upload/v1674912590/general/wcrawyzqyaprfxmmhxbw.png)](https://www.youtube.com/embed/GkZTeKZgwqc)
 
 ---
 
