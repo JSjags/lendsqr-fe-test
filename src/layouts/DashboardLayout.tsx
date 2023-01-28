@@ -7,7 +7,6 @@ import styles from "./styles/dashboardlayout.module.scss";
 const DashboardLayout: FC<Renderable> = ({
   children,
   navState,
-  handleMenuBtn,
 }: ChildrenProps): ReactElement => {
   return (
     <div className={styles.container}>

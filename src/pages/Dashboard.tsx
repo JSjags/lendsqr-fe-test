@@ -72,6 +72,7 @@ const Dashboard = () => {
 
   const handleMenuBtn: Function = (): void => setNavState(!navState);
 
+  // Event listeners for filter and user popup menu
   useEffect(() => {
     document.addEventListener("click", (e: Event) => {
       const path: any[] = e.composedPath();
@@ -115,18 +116,19 @@ const Dashboard = () => {
     };
   }, []);
 
+  // Automatically set navbar state
   useEffect(() => {
     window.addEventListener("resize", (e: UIEvent) => {
       const w = e.target as Window;
       setNavMenuBtn(w.innerWidth < 1080 ? true : false);
-      navState === false && w.innerWidth > 1080 && setNavState(true);
+      setNavState(window.innerWidth > 1080 ? true : false);
     });
 
     return () => {
       window.removeEventListener("resize", (e: UIEvent) => {
         const w = e.target as Window;
         setNavMenuBtn(w.innerWidth < 1080 ? true : false);
-        navState === false && w.innerWidth > 1080 && setNavState(true);
+        setNavState(window.innerWidth > 1080 ? true : false);
       });
     };
   }, []);
@@ -142,13 +144,11 @@ const Dashboard = () => {
           <p>Loading Users...</p>
         </div>
       )}
-
       {error && (
         <div className={styles.container}>
           <p>{error}</p>
         </div>
       )}
-
       {/* Display dashboard  */}
       {users && users.length > 0 && (
         <div className={styles.superior_cont}>
@@ -158,7 +158,7 @@ const Dashboard = () => {
               onClick={() => handleMenuBtn()}
               title="Menu"
             >
-              {/* <img src={menuBtn} alt="" /> */}
+              <img src={menuBtn} alt="" />
             </button>
           )}
           <div className={styles.container} ref={pageRef}>

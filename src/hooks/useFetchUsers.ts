@@ -3,7 +3,7 @@ import { usersState } from "../global";
 import { calculatePages } from "../lib/dashboard";
 
 export const useFetchUsers: Function = (): object => {
-  const cachedUsers: object[] | null = JSON.parse(
+  const cachedUsers: object[] | {} = JSON.parse(
     localStorage.getItem("lendsqUsers") || "{}"
   );
   const resultsPerPage: string | number =
@@ -33,8 +33,10 @@ export const useFetchUsers: Function = (): object => {
         )
         .finally(() => setIsLoading(false));
     };
-    cachedUsers ? setUsers(cachedUsers) : fetchAllUsers();
-    setPages(calculatePages(cachedUsers?.length, resultsPerPage));
+    Object.keys(cachedUsers).length > 0
+      ? setUsers(cachedUsers)
+      : fetchAllUsers();
+    setPages(calculatePages(Object.keys(cachedUsers).length, resultsPerPage));
   }, []);
 
   return { users, pages, isLoading, error };
