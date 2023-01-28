@@ -11,6 +11,7 @@ const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [inputType, setInputType] = useState("password");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleShowPassword: CallableFunction = (e: Event): void => {
     e.preventDefault();
@@ -36,8 +37,9 @@ const Login = () => {
         />
         <div className={styles.form_container}>
           <h1>Welcome!</h1>
-          <p>Enter details to login.</p>
+          <p className={styles.subheading}>Enter details to login.</p>
 
+          <p className={styles.error}>{errorMessage}</p>
           <form>
             <div className={styles.email}>
               <input
@@ -47,6 +49,7 @@ const Login = () => {
                 placeholder="Email"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
+                onBlur={(e) => (e.target.value = password.trim())}
                 data-testid={"username"}
               />
             </div>
@@ -57,6 +60,7 @@ const Login = () => {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onBlur={(e) => (e.target.value = password.trim())}
                 placeholder="Password"
                 data-testid={"password"}
               />
@@ -64,7 +68,14 @@ const Login = () => {
             </div>
             <p className={styles.forgot_password}>FORGOT PASSWORD?</p>
             <button
-              onClick={(e) => handleLogin(e, navigate)}
+              onClick={(e) => {
+                e.preventDefault();
+                setErrorMessage("");
+                if (userName.trim().length < 1 || password.trim().length < 1) {
+                  return setErrorMessage("Please fill any empty field.");
+                }
+                handleLogin(e, navigate);
+              }}
               className={styles.login_btn}
               data-testid={"login-btn"}
             >

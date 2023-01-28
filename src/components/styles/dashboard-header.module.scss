@@ -17,6 +17,7 @@
 }
 .logo {
   width: clamp(80px, 20%, 175px);
+  cursor: pointer;
 }
 .searchbox {
   width: clamp(150px, 30vw, 400px);
