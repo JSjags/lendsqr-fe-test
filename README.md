@@ -16,22 +16,16 @@ Lendsqr frontend engineering test built with **React**, **Typescript**, **SCSS**
 
 [![Lendsqr Frontend Engineer Assessment Video Demo](https://res.cloudinary.com/duiyqqc0n/image/upload/v1674912590/general/wcrawyzqyaprfxmmhxbw.png)](https://www.youtube.com/embed/GkZTeKZgwqc)
 
----
-
 # Quick Setup Guide
 
 The following steps should setup this project locally on your machine after downloading the project folder.
 
 ## Prerequisites
 
----
-
 - npm >= 8.19.3
 - node >= 18.13.0
 
 ## Install
-
----
 
 Install all necessary dependencies
 
@@ -42,8 +36,6 @@ npm install
 
 ## Usage
 
----
-
 Run development server
 
 ```js
@@ -52,8 +44,6 @@ npm run dev
 ```
 
 ## Run Tests
-
----
 
 ```js
 npm run test
