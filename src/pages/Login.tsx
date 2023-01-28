@@ -49,7 +49,7 @@ const Login = () => {
                 placeholder="Email"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
-                onBlur={(e) => (e.target.value = password.trim())}
+                onBlur={(e) => (e.target.value = userName.trim())}
                 data-testid={"username"}
               />
             </div>
