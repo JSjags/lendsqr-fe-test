@@ -7,7 +7,7 @@ Lendsqr frontend engineering test built with **React**, **Typescript**, **SCSS**
 # Features
 
 - Caches fetched data for faster loadtimes on revisit.
-- Redirects from /, /home to login page and /user, /users to users/1.
+- Redirects from /, /home to login page and /dashboard/user, /dashboard/users to dashboard/users/1.
 - Error page for handling URLs not found.
 - Mobile responsive.
 - Custom scrollbars.
