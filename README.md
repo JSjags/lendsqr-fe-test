@@ -4,6 +4,8 @@
 
 Lendsqr frontend engineering test built with **React**, **Typescript**, **SCSS**, **Vitest**, **React Testing library**.
 
+Click the following link to view live URL [Lendsqr Frontend Assessment Live URL](https://lendsqr-fe-test-topaz.vercel.app/]
+
 # Features
 
 - Caches fetched data for faster loadtimes on revisit.
