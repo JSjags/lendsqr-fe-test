@@ -50,7 +50,7 @@ const UserDetails = () => {
     >
       {isLoading && (
         <div className={styles.container}>
-          <p role="paragraph">Loading Users...</p>
+          <p role="paragraph">Loading User Details...</p>
         </div>
       )}
       {userDetails && Object.keys(userDetails).length && (
