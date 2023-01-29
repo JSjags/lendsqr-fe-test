@@ -1,12 +1,53 @@
-import React from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "./styles/dropdown.module.scss";
 import caretDown from "../assets/dashboard/caret-down.svg";
 
-const Dropdown = () => {
+const optionsList = ["10", "25", "50", "100"];
+
+const Dropdown = ({
+  updatePaginatedResults,
+}: {
+  updatePaginatedResults: Function;
+}) => {
+  const [resultsPerPage, setResultsPerPage]: [
+    resultsPerPage: string | number,
+    setResultsPerPage: Function
+  ] = useState(localStorage.getItem("resultsPerPage") || 10);
+  const [showOptions, setShowOptions]: [
+    showOptions: boolean,
+    setShowOptions: Function
+  ] = useState(false);
+
+  useEffect(() => {
+    !resultsPerPage && localStorage.setItem("resultsPerPage", "100");
+    updatePaginatedResults(resultsPerPage);
+  }, [resultsPerPage]);
+
   return (
-    <div className={styles.container} data-testid="dropdown">
-      <p data-testid="value">100</p>
+    <div
+      className={styles.container}
+      data-testid="dropdown"
+      id="dropdown"
+      onClick={() => setShowOptions(!showOptions)}
+    >
+      <p data-testid="value">{resultsPerPage}</p>
       <img src={caretDown} alt="caret-down" />
+      {showOptions && (
+        <div className={styles.options}>
+          {optionsList.map((option, i) => (
+            <p
+              key={i}
+              onClick={() => {
+                localStorage.setItem("resultsPerPage", option),
+                  setResultsPerPage(option);
+                updatePaginatedResults(option);
+              }}
+            >
+              {option}
+            </p>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

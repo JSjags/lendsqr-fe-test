@@ -58,14 +58,14 @@ html {
   }
 
   .error {
-    font-size: 14px;
-    color: red;
-    margin-top: 60px;
+    font-size: 12px;
+    color: rgba(255, 56, 56, 0.978);
+    margin-top: 6px;
   }
 
   form {
     flex: 1;
-    margin-top: 20px;
+    margin-top: 60px;
     justify-content: space-between;
     display: flex;
     flex-direction: column;
@@ -124,6 +124,7 @@ html {
         font-weight: 600;
         font-family: g.$avenir-regular;
         color: g.$tertiary-text-color;
+        cursor: pointer;
       }
     }
 
@@ -131,6 +132,7 @@ html {
       font-size: 12px;
       color: g.$tertiary-text-color;
       font-weight: 600;
+      cursor: pointer;
     }
 
     .login_btn {

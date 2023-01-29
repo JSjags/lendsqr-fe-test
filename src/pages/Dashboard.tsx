@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import DashboardLayout from "../layouts/DashboardLayout";
 import styles from "../styles/dashboard.module.scss";
 import { useFetchUsers } from "../hooks/useFetchUsers";
@@ -24,11 +24,15 @@ import FilterForm from "../components/FilterForm";
 import menuBtn from "../assets/dashboard/menu-btn.svg";
 
 const Dashboard = () => {
-  const [pageNumber, _]: pageNumberState = useState(1);
+  const [pageNumber, setPageNumber]: pageNumberState = useState(1);
   const [userMenu, setUserMenu]: userMenuState = useState<userMenuObject>({
     menuId: null,
     menuIsOpen: false,
   });
+  const [paginatedResults, setPaginatedResults]: [
+    resultsPerPage: number | string,
+    setResultsPerPage: Function
+  ] = useState(localStorage.getItem("resultsPerPage") || 10);
   const [showFilter, setShowFilter] = useState<{
     currentTab: string;
     showFilter: boolean;
@@ -36,6 +40,7 @@ const Dashboard = () => {
   const currentUserMenuIndex: { current: null | number } = useRef(null);
   const filterPosition = useRef(20);
   const pageRef: any = useRef(null);
+  const [usersToDisplay, setUsersToDisplay] = useState([]);
   const { users, pages, isLoading, error } = useFetchUsers();
 
   const handleFilter: Function = (e: any, currentTab: string): void => {
@@ -62,6 +67,12 @@ const Dashboard = () => {
       });
     }
   };
+  const [totalPages, setTotalPages]: [
+    totalPages: number,
+    setTotalPages: Function
+  ] = useState(
+    Math.ceil(users.length / parseInt(String(paginatedResults), 10))
+  );
   const [navMenuBtn, setNavMenuBtn] = useState(
     window.innerWidth < 1080 ? true : false
   );
@@ -70,7 +81,26 @@ const Dashboard = () => {
     window.innerWidth < 1080 ? false : true
   );
 
+  const paging: [] = useMemo(() => {
+    let pagingArray: any = [1, 2, "...", 9, 10];
+    if (pageNumber === 1) pagingArray = [1, 2, "...", 9, 10];
+    if (pageNumber === 2) pagingArray = [1, 2, 3, "...", 9, 10];
+    if (pageNumber === 3) pagingArray = [1, 2, 3, 4, "...", 9, 10];
+    if (pageNumber === 4) pagingArray = [1, "...", 3, 4, 5, "...", 10];
+    if (pageNumber === 5) pagingArray = [1, "...", 4, 5, 6, "...", 10];
+    if (pageNumber === 6) pagingArray = [1, "...", 5, 6, 7, "...", 10];
+    if (pageNumber === 7) pagingArray = [1, "...", 6, 7, 8, "...", 10];
+    if (pageNumber === 8) pagingArray = [1, 2, "...", 7, 8, 9, 10];
+    if (pageNumber === 9) pagingArray = [1, 2, "...", 8, 9, 10];
+    if (pageNumber === 10) pagingArray = [1, 2, "...", 9, 10];
+
+    return pagingArray;
+  }, [pageNumber]);
+
   const handleMenuBtn: Function = (): void => setNavState(!navState);
+
+  const updatePaginatedResults: Function = (value: string) =>
+    setPaginatedResults(value);
 
   // Event listeners for filter and user popup menu
   useEffect(() => {
@@ -132,6 +162,26 @@ const Dashboard = () => {
       });
     };
   }, []);
+
+  useEffect(() => {
+    const startingPosition =
+      pageNumber <= 1
+        ? 0
+        : (pageNumber - 1) * parseInt(String(paginatedResults)) - 1;
+    setUsersToDisplay(
+      users.slice(
+        startingPosition,
+        startingPosition + parseInt(String(paginatedResults))
+      )
+    );
+    setTotalPages(
+      Math.ceil(users.length / parseInt(String(paginatedResults), 10))
+    );
+  }, [users, pageNumber, paginatedResults]);
+
+  useEffect(() => {
+    setPageNumber(1);
+  }, [paginatedResults]);
 
   return (
     <DashboardLayout
@@ -259,7 +309,7 @@ const Dashboard = () => {
                     <th></th>
                   </tr>
                   <tbody data-testid="table-body">
-                    {users.map((user: userObject, index: number) => (
+                    {usersToDisplay.map((user: userObject, index: number) => (
                       <Fragment key={index}>
                         <tr
                           style={{
@@ -273,6 +323,7 @@ const Dashboard = () => {
                                 styles.orgName,
                               ].join(" ")}
                             >
+                              {index}
                               {user.orgName}
                             </span>
                           </td>
@@ -357,7 +408,9 @@ const Dashboard = () => {
             {/* Pagination Bar */}
             <div className={styles.pagination_bar}>
               <div>
-                <span>Showing</span> <Dropdown /> <span>out of 100</span>
+                <span>Showing</span>{" "}
+                <Dropdown updatePaginatedResults={updatePaginatedResults} />{" "}
+                <span>out of 100</span>
               </div>
               <div className={styles.pagination_cont}>
                 <div
@@ -366,22 +419,77 @@ const Dashboard = () => {
                       ? styles.pagination_btn
                       : styles.pagination_btn_active
                   }
+                  onClick={() =>
+                    pageNumber > 1 && setPageNumber((prev: number) => prev - 1)
+                  }
                 >
                   <img className={styles.left} src={caretDown} alt="previous" />
                 </div>
                 <div className={styles.page_num_cont}>
-                  <button className={styles.page_num_btn_active}>1</button>
-                  <button className={styles.page_num_btn}>2</button>
-                  <span className={styles.ellipses}>...</span>
-                  <button className={styles.page_num_btn}>4</button>
-                  <button className={styles.page_num_btn}>5</button>
+                  {totalPages < 5 ? (
+                    Array(
+                      Math.ceil(
+                        users.length / parseInt(String(paginatedResults), 10)
+                      )
+                    )
+                      .fill(0)
+                      .map((_, i) => (
+                        <button
+                          key={i}
+                          className={
+                            pageNumber === i + 1
+                              ? styles.page_num_btn_active
+                              : styles.page_num_btn
+                          }
+                          onClick={(e: React.MouseEvent<HTMLElement>) =>
+                            setPageNumber(
+                              parseInt((e.target as any).textContent)
+                            )
+                          }
+                        >
+                          {i + 1}
+                        </button>
+                      ))
+                  ) : (
+                    <div className={styles.page_num_cont}>
+                      {paging.map((p, i) => (
+                        <button
+                          key={i}
+                          className={
+                            p === "..."
+                              ? styles.ellipses
+                              : p === pageNumber
+                              ? styles.page_num_btn_active
+                              : styles.page_num_btn
+                          }
+                          onClick={(e: React.MouseEvent<HTMLElement>) =>
+                            setPageNumber(
+                              parseInt((e.target as any).textContent)
+                            )
+                          }
+                          disabled={p === "..." ? true : false}
+                        >
+                          {p}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <div
                   className={
-                    pageNumber + 1 > pages
+                    pageNumber + 1 >
+                    Math.ceil(
+                      users.length / parseInt(String(paginatedResults), 10)
+                    )
                       ? styles.pagination_btn
                       : styles.pagination_btn_active
                   }
+                  onClick={() => {
+                    pageNumber + 1 <=
+                      Math.ceil(
+                        users.length / parseInt(String(paginatedResults), 10)
+                      ) && setPageNumber((prev: number) => prev + 1);
+                  }}
                 >
                   <img className={styles.right} src={caretDown} alt="next" />
                 </div>
