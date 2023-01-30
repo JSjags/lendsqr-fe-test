@@ -9,19 +9,21 @@ import "./styles/global.scss";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />}>
-          <Route path="home" element={<Home />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/dashboard/user" element={<Users />} />
-        <Route path="/dashboard/users" element={<Users />} />
-        <Route path="/dashboard/users/:userId" element={<UserDetails />} />
-        <Route path="/*" element={<RouteError />} />
-      </Routes>
-    </Router>
+    <div className="root">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route path="home" element={<Home />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/user" element={<Users />} />
+          <Route path="/dashboard/users" element={<Users />} />
+          <Route path="/dashboard/users/:userId" element={<UserDetails />} />
+          <Route path="/*" element={<RouteError />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

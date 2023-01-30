@@ -76,3 +76,9 @@ $black: #000000;
     border-radius: 4px;
   }
 }
+
+.root {
+  max-width: 1440px;
+  margin: auto;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
