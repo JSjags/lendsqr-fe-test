@@ -235,9 +235,12 @@
     line-height: 16px;
   }
 }
+.page_results {
+  text-align: center;
+}
 .pagination_cont {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 20px;
 }
 .pagination_btn {
@@ -288,7 +291,7 @@
 }
 .page_num_cont {
   display: flex;
-  flex-wrap: none;
+  flex-wrap: wrap;
   gap: 20px;
 
   .page_num_btn {

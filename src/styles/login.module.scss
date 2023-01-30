@@ -23,7 +23,7 @@ html {
   flex-direction: column;
 }
 .logo {
-  width: clamp(80px, 20%, 175px);
+  width: clamp(120px, 20%, 175px);
 }
 .mainbox {
   display: flex;
@@ -37,10 +37,9 @@ html {
   height: 100%;
 }
 .form_container {
-  width: 50%;
   padding: clamp(1rem, 10vmin, 6rem);
   height: 100%;
-  width: 100%;
+  width: clamp(200px, 50%, 800px);
   display: flex;
   flex-direction: column;
 
@@ -171,14 +170,14 @@ html {
     flex-direction: column;
   }
   .illustration {
-    width: clamp(150px, 30%, 500px);
-    margin: 5vh 0;
+    width: clamp(150px, 100%, 300px);
+    margin: 5vh 0 0;
   }
 
   .form_container {
     padding: 0 0 clamp(1rem, 5vmin, 3rem) 0;
     flex: none;
-    width: clamp(180px, 90%, 260px);
+    width: clamp(180px, 90%, 320px);
     margin: auto;
 
     h1 {
@@ -274,7 +273,7 @@ html {
   }
 }
 @media screen and (max-width: 425px) {
-  .illustration {
-    display: none;
-  }
+  // .illustration {
+  //   display: none;
+  // }
 }

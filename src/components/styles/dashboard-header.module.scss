@@ -112,6 +112,11 @@
 }
 
 @media screen and (max-width: 530px) {
+  .searchbox {
+    width: clamp(200px, 40%, 400px);
+    margin-left: calc(100px / 1440px * 100%);
+  }
+
   .toolsbox {
     display: flex;
     flex: 1;
@@ -156,6 +161,9 @@
 }
 
 @media screen and (max-width: 480px) {
+  .container {
+    justify-content: space-between;
+  }
   .searchbox {
     display: none;
   }

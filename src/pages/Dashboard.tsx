@@ -407,7 +407,7 @@ const Dashboard = () => {
 
             {/* Pagination Bar */}
             <div className={styles.pagination_bar}>
-              <div>
+              <div className={styles.page_results}>
                 <span>Showing</span>{" "}
                 <Dropdown updatePaginatedResults={updatePaginatedResults} />{" "}
                 <span>out of 100</span>
