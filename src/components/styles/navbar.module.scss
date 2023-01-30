@@ -164,3 +164,10 @@
   padding-left: calc(30px / 1440px * 100vw);
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: 360px) {
+  .container {
+    width: clamp(100px, calc(100% - 60px), 240px);
+    min-width: 100px;
+  }
+}
