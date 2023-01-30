@@ -1,4 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
+import React, {
+  FC,
+  FunctionComponent,
+  ReactComponentElement,
+  useEffect,
+  useState,
+} from "react";
 import styles from "./styles/dropdown.module.scss";
 import caretDown from "../assets/dashboard/caret-down.svg";
 
@@ -7,7 +13,7 @@ const optionsList = ["10", "25", "50", "100"];
 const Dropdown = ({
   updatePaginatedResults,
 }: {
-  updatePaginatedResults: Function;
+  updatePaginatedResults: any;
 }) => {
   const [resultsPerPage, setResultsPerPage]: [
     resultsPerPage: string | number,

@@ -99,7 +99,7 @@ const Dashboard = () => {
 
   const handleMenuBtn: Function = (): void => setNavState(!navState);
 
-  const updatePaginatedResults: Function = (value: string) =>
+  const updatePaginatedResults: CallableFunction = (value: string) =>
     setPaginatedResults(value);
 
   // Event listeners for filter and user popup menu
